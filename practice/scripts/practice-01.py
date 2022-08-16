@@ -22,15 +22,39 @@ class Player():
 # Initialize Player Object named player
 player = Player()
 
+# Player Move Function
+def PlayerMove(x, y, vel):
+    print(player.x)
+    keys = pygame.key.get_pressed()
+    if (keys[ord('a')]):
+        x -= vel
+    if (keys[ord('d')]):
+        x += vel
+    if (keys[ord('w')]):
+        y -= vel
+    if (keys[ord('s')]):
+        y += vel
+    UpdatePlayer(x, y)
+
+# Update Player
+def UpdatePlayer(x, y):
+    player.x = x
+    player.y = y
+    player.params = (player.x, player.y, player.WIDTH, player.HEIGHT)
+
 # While the Game is Running
 run = True
 while run:
-    pygame.time.delay(100)
+    pygame.time.delay(10)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+
+    # Move Player
+    PlayerMove(player.x, player.y, player.vel)
             
+    win.fill((0, 0, 0))
     pygame.draw.rect(win, player.color, player.params)
     pygame.display.update()
 
